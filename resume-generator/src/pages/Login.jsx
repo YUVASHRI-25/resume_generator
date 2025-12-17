@@ -20,7 +20,7 @@ const Login = () => {
     e.preventDefault()
     // Mock authentication
     console.log('Form submitted:', formData)
-    navigate('/dashboard')
+    navigate('/resume-choice')
   }
 
   return (
