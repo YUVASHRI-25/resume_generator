@@ -1,135 +1,166 @@
 import { useNavigate } from 'react-router-dom';
+import { ArrowRight, FileText, Upload, Home } from 'lucide-react';
 
 const ResumeChoice = () => {
   const navigate = useNavigate();
 
-  const handleCreateNew = () => {
-    navigate('/dashboard?mode=scratch');
-  };
-
-  const handleImproveExisting = () => {
-    navigate('/dashboard?mode=upload');
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
-      <div className="container mx-auto px-4 py-16 md:py-24">
+      <div className="container mx-auto px-4 py-8 md:py-12">
+        {/* Navigation */}
+        <div className="flex justify-between items-center mb-8">
+          <button
+            onClick={() => navigate('/')}
+            className="flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors"
+          >
+            <Home size={20} />
+            <span>Home</span>
+          </button>
+          <div className="flex items-center gap-2 text-sm text-gray-600">
+            <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full">Step 3 of 3</span>
+          </div>
+        </div>
+
         <div className="flex flex-col md:flex-row items-center justify-between gap-12">
           {/* Left Side - Content */}
-          <div className="w-full md:w-1/2 space-y-8">
-            <div className="max-w-md mx-auto md:mx-0">
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
-                Build a Resume That Gets You Hired
+          <div className="md:w-1/2 space-y-8">
+            <div className="space-y-4">
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+                Let's Build Your Resume
               </h1>
-              <p className="text-lg text-gray-600 mb-8">
-                Create a professional resume in minutes with our easy-to-use builder. 
-                Get expert suggestions to improve your resume and land your dream job faster.
+              <p className="text-lg text-gray-600">
+                Choose how you'd like to create your professional resume. You can start from scratch or upload an existing one.
               </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+            </div>
+
+            <div className="space-y-4 pt-4">
+              <div className="space-y-2">
                 <button
-                  onClick={handleCreateNew}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg"
+                  onClick={() => navigate('/templates/ats')}
+                  className="w-full flex items-center justify-between gap-4 bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 font-medium py-4 px-6 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md"
                 >
-                  Create New Resume
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-blue-100 rounded-lg">
+                      <FileText className="text-blue-600" size={20} />
+                    </div>
+                    <div className="text-left">
+                      <div className="font-semibold">Create New Resume</div>
+                      <div className="text-sm text-gray-500">Choose from ATS-optimized templates</div>
+                    </div>
+                  </div>
+                  <ArrowRight size={18} className="text-gray-400" />
                 </button>
+
                 <button
-                  onClick={handleImproveExisting}
-                  className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-medium py-3 px-8 rounded-lg transition-all duration-200"
+                  onClick={() => navigate('/dashboard?mode=upload')}
+                  className="w-full flex items-center justify-between gap-4 bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 font-medium py-4 px-6 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md"
                 >
-                  Improve Existing Resume
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-green-100 rounded-lg">
+                      <Upload className="text-green-600" size={20} />
+                    </div>
+                    <div className="text-left">
+                      <div className="font-semibold">Improve Existing Resume</div>
+                      <div className="text-sm text-gray-500">Upload and enhance your current resume</div>
+                    </div>
+                  </div>
+                  <ArrowRight size={18} className="text-gray-400" />
                 </button>
               </div>
-              
-              <div className="space-y-3 text-sm text-gray-600">
-                <div className="flex items-center">
-                  <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  Higher chance of getting hired
-                </div>
-                <div className="flex items-center">
-                  <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  Better salary opportunities
-                </div>
-                <div className="flex items-center">
-                  <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  ATS-optimized templates
-                </div>
+
+              <div className="pt-4">
+                <button
+                  onClick={() => navigate('/dashboard?mode=scratch')}
+                  className="w-full py-3 px-4 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
+                >
+                  Use Basic Template (No ATS Optimization)
+                </button>
+              </div>
+            </div>
+
+            <div className="pt-8 space-y-2">
+              <div className="flex items-center gap-2 text-green-600">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span className="text-sm font-medium">Higher chance of getting hired</span>
+              </div>
+              <div className="flex items-center gap-2 text-green-600">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span className="text-sm font-medium">Better salary opportunities</span>
               </div>
             </div>
           </div>
 
           {/* Right Side - Resume Preview */}
-          <div className="w-full md:w-1/2 relative">
-            <div className="bg-white rounded-xl shadow-2xl overflow-hidden transform rotate-1 hover:rotate-0 transition-transform duration-300 max-w-md mx-auto">
-              {/* Resume Header */}
-              <div className="bg-blue-600 text-white p-6">
-                <div className="flex items-center">
-                  <div className="w-16 h-16 rounded-full bg-blue-400 flex items-center justify-center text-2xl font-bold text-white">
-                    JD
-                  </div>
-                  <div className="ml-4">
-                    <h2 className="text-xl font-bold">John Doe</h2>
-                    <p className="text-blue-100">Senior Product Designer</p>
-                  </div>
+          <div className="md:w-1/2 relative">
+            <div className="bg-white rounded-xl shadow-2xl p-6 transform rotate-1 hover:rotate-0 transition-transform duration-300 max-w-md mx-auto">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-2xl font-bold">
+                  JD
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900">John Doe</h3>
+                  <p className="text-gray-600">Senior Product Designer</p>
                 </div>
               </div>
-              
-              {/* Resume Content */}
-              <div className="p-6 space-y-6">
+
+              <div className="space-y-4">
                 <div>
-                  <h3 className="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-2">Summary</h3>
-                  <p className="text-sm text-gray-700">
-                    Experienced product designer with 5+ years in creating user-centered digital experiences. 
-                    Passionate about solving complex problems through clean and intuitive design.
+                  <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Summary</h4>
+                  <p className="text-gray-700 text-sm leading-relaxed">
+                    Experienced product designer with 5+ years in creating beautiful and functional user experiences.
                   </p>
                 </div>
-                
+
                 <div>
-                  <h3 className="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-2">Experience</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <div className="flex justify-between">
-                        <span className="font-medium">Senior Product Designer</span>
-                        <span className="text-sm text-gray-500">2020 - Present</span>
-                      </div>
-                      <p className="text-sm text-gray-600">TechCorp Inc.</p>
-                    </div>
-                    <div>
-                      <div className="flex justify-between">
-                        <span className="font-medium">UI/UX Designer</span>
-                        <span className="text-sm text-gray-500">2018 - 2020</span>
-                      </div>
-                      <p className="text-sm text-gray-600">DesignHub</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div>
-                  <h3 className="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-2">Skills</h3>
+                  <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Skills</h4>
                   <div className="flex flex-wrap gap-2">
-                    {['UX Research', 'UI Design', 'Figma', 'Sketch', 'Prototyping', 'User Testing', 'HTML/CSS', 'Design Systems'].map((skill) => (
-                      <span key={skill} className="px-3 py-1 bg-blue-50 text-blue-700 text-xs rounded-full">
+                    {['UI/UX Design', 'Figma', 'User Research', 'Prototyping', 'HTML/CSS', 'JavaScript'].map((skill) => (
+                      <span key={skill} className="bg-blue-50 text-blue-700 text-xs px-3 py-1 rounded-full">
                         {skill}
                       </span>
                     ))}
                   </div>
                 </div>
+
+                <div>
+                  <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Experience</h4>
+                  <div className="space-y-2">
+                    <div>
+                      <p className="font-medium text-gray-900">Senior Product Designer</p>
+                      <p className="text-sm text-gray-600">TechCorp • 2020 - Present</p>
+                    </div>
+                  </div>
+                </div>
               </div>
-              
+
               {/* Floating Badges */}
-              <div className="absolute -top-4 -right-4 bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full shadow-md">
-                ATS Friendly
+              <div className="absolute -top-4 -right-4">
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                  ATS Friendly
+                </span>
               </div>
-              <div className="absolute -bottom-4 -left-4 bg-purple-100 text-purple-800 text-xs font-semibold px-3 py-1 rounded-full shadow-md">
-                AI Suggestions
+              <div className="absolute -bottom-4 -left-4">
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                  AI Suggestions
+                </span>
               </div>
             </div>
+
+            {/* Decorative Elements */}
+            <div className="absolute -z-10 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-20 -top-20 -right-20" />
+            <div className="absolute -z-10 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-20 bottom-10 -left-10" />
           </div>
         </div>
       </div>
