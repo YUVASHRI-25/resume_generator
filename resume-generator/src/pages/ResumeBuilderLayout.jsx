@@ -2,11 +2,12 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 const steps = [
   { id: 'contacts', label: 'Contacts' },
-  { id: 'experience', label: 'Experience' },
+  { id: 'experience', label: 'Projects' },
   { id: 'education', label: 'Education' },
   { id: 'skills', label: 'Skills' },
   { id: 'certificates', label: 'Certificates' },
   { id: 'summary', label: 'Summary' },
+  { id: 'job-description', label: 'Job Description' },
   { id: 'finalize', label: 'Finalize' },
 ]
 

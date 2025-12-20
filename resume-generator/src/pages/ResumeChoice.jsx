@@ -9,7 +9,7 @@ const ResumeChoice = () => {
       <div className="container mx-auto px-4 py-8 md:py-12">
         {/* Navigation */}
         <div className="flex justify-between items-center mb-8">
-          <button
+          <button 
             onClick={() => navigate('/')}
             className="flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors"
           >
@@ -50,7 +50,7 @@ const ResumeChoice = () => {
                   </div>
                   <ArrowRight size={18} className="text-gray-400" />
                 </button>
-
+                
                 <button
                   onClick={() => navigate('/dashboard?mode=upload')}
                   className="w-full flex items-center justify-between gap-4 bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 font-medium py-4 px-6 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md"
@@ -67,7 +67,7 @@ const ResumeChoice = () => {
                   <ArrowRight size={18} className="text-gray-400" />
                 </button>
               </div>
-
+              
               <div className="pt-4">
                 <button
                   onClick={() => navigate('/dashboard?mode=scratch')}
@@ -81,21 +81,13 @@ const ResumeChoice = () => {
             <div className="pt-8 space-y-2">
               <div className="flex items-center gap-2 text-green-600">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  />
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <span className="text-sm font-medium">Higher chance of getting hired</span>
               </div>
               <div className="flex items-center gap-2 text-green-600">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  />
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <span className="text-sm font-medium">Better salary opportunities</span>
               </div>
@@ -114,7 +106,7 @@ const ResumeChoice = () => {
                   <p className="text-gray-600">Senior Product Designer</p>
                 </div>
               </div>
-
+              
               <div className="space-y-4">
                 <div>
                   <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Summary</h4>

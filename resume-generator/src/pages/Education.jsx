@@ -1,30 +1,65 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ResumeBuilderLayout from './ResumeBuilderLayout'
+import { useResume } from '../context/ResumeContext'
 
 const emptyEducation = () => ({
-  schoolName: '',
+  institution: '',
   location: '',
   degree: '',
-  startDate: '',
-  endDate: '',
+  start_year: '',
+  end_year: '',
   description: '',
 })
 
 const Education = () => {
-  const [educations, setEducations] = useState([emptyEducation()])
+  const { resumeData, updateEducation } = useResume()
+  const [educations, setEducations] = useState(
+    resumeData.education && resumeData.education.length > 0
+      ? resumeData.education.map((edu) => ({
+          institution: edu.institution || '',
+          location: edu.location || '',
+          degree: edu.degree || '',
+          start_year: edu.start_year || '',
+          end_year: edu.end_year || '',
+          description: edu.description || '',
+        }))
+      : [emptyEducation()]
+  )
+
+  // Update local state when resumeData changes (from backend parsing)
+  useEffect(() => {
+    if (resumeData.education && resumeData.education.length > 0) {
+      setEducations(
+        resumeData.education.map((edu) => ({
+          institution: edu.institution || '',
+          location: edu.location || '',
+          degree: edu.degree || '',
+          start_year: edu.start_year || '',
+          end_year: edu.end_year || '',
+          description: edu.description || '',
+        }))
+      )
+    }
+  }, [resumeData.education])
 
   const handleChange = (index, field, value) => {
-    setEducations((prev) =>
-      prev.map((edu, i) => (i === index ? { ...edu, [field]: value } : edu)),
+    const updated = educations.map((edu, i) =>
+      i === index ? { ...edu, [field]: value } : edu
     )
+    setEducations(updated)
+    updateEducation(updated)
   }
 
   const handleAdd = () => {
-    setEducations((prev) => [...prev, emptyEducation()])
+    const updated = [...educations, emptyEducation()]
+    setEducations(updated)
+    updateEducation(updated)
   }
 
   const handleRemove = (index) => {
-    setEducations((prev) => prev.filter((_, i) => i !== index))
+    const updated = educations.filter((_, i) => i !== index)
+    setEducations(updated.length > 0 ? updated : [emptyEducation()])
+    updateEducation(updated.length > 0 ? updated : [emptyEducation()])
   }
 
   return (
@@ -58,10 +93,10 @@ const Education = () => {
                 <input
                   type="text"
                   className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="UCLA"
-                  value={edu.schoolName}
+                  placeholder="e.g., MIT, Harvard University"
+                  value={edu.institution}
                   onChange={(e) =>
-                    handleChange(index, 'schoolName', e.target.value)
+                    handleChange(index, 'institution', e.target.value)
                   }
                 />
               </div>
@@ -72,7 +107,7 @@ const Education = () => {
                 <input
                   type="text"
                   className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="New York"
+                  placeholder="e.g., Boston, MA"
                   value={edu.location}
                   onChange={(e) =>
                     handleChange(index, 'location', e.target.value)
@@ -104,10 +139,10 @@ const Education = () => {
                   <input
                     type="text"
                     className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="MM/YYYY"
-                    value={edu.startDate}
+                    placeholder="YYYY"
+                    value={edu.start_year}
                     onChange={(e) =>
-                      handleChange(index, 'startDate', e.target.value)
+                      handleChange(index, 'start_year', e.target.value)
                     }
                   />
                 </div>
@@ -118,10 +153,10 @@ const Education = () => {
                   <input
                     type="text"
                     className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="MM/YYYY"
-                    value={edu.endDate}
+                    placeholder="YYYY"
+                    value={edu.end_year}
                     onChange={(e) =>
-                      handleChange(index, 'endDate', e.target.value)
+                      handleChange(index, 'end_year', e.target.value)
                     }
                   />
                 </div>

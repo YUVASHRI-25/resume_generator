@@ -1,0 +1,16 @@
+fastapi
+uvicorn[standard]
+python-multipart
+pdfplumber
+pdfminer.six
+pytesseract
+pdf2image
+opencv-python
+spacy
+python-dotenv
+openai
+httpx
+llama-cpp-python>=0.2.23
+sentence-transformers>=2.2.2
+torch>=2.0.0
+transformers>=4.30.0

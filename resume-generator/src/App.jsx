@@ -6,11 +6,12 @@ import Dashboard from './pages/Dashboard'
 import ResumeChoice from './pages/ResumeChoice'
 import AtsTemplates from './pages/AtsTemplates'
 import Contacts from './pages/Contacts'
-import Experience from './pages/Experience'
+import Projects from './pages/Projects'
 import Education from './pages/Education'
 import Skills from './pages/Skills'
 import Certificates from './pages/Certificates'
 import Summary from './pages/Summary'
+import JobDescription from './pages/JobDescription'
 import Finalize from './pages/Finalize'
 
 function App() {
@@ -24,11 +25,12 @@ function App() {
         <Route path="/templates/ats" element={<AtsTemplates />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/builder/contacts" element={<Contacts />} />
-        <Route path="/builder/experience" element={<Experience />} />
+        <Route path="/builder/experience" element={<Projects />} />
         <Route path="/builder/education" element={<Education />} />
         <Route path="/builder/skills" element={<Skills />} />
         <Route path="/builder/certificates" element={<Certificates />} />
         <Route path="/builder/summary" element={<Summary />} />
+        <Route path="/builder/job-description" element={<JobDescription />} />
         <Route path="/builder/finalize" element={<Finalize />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

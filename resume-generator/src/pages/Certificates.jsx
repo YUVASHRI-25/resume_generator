@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ResumeBuilderLayout from './ResumeBuilderLayout'
+import { useResume } from '../context/ResumeContext'
 
 const emptyCertificate = () => ({
   name: '',
@@ -10,20 +11,62 @@ const emptyCertificate = () => ({
 })
 
 const Certificates = () => {
-  const [certificates, setCertificates] = useState([emptyCertificate()])
+  const { resumeData, updateCertifications } = useResume()
+  const [certificates, setCertificates] = useState(
+    resumeData.certifications && resumeData.certifications.length > 0
+      ? resumeData.certifications.map((cert) =>
+          typeof cert === 'string'
+            ? { ...emptyCertificate(), name: cert }
+            : { ...emptyCertificate(), name: cert.name || cert }
+        )
+      : [emptyCertificate()]
+  )
+
+  // Update local state when resumeData changes (from backend parsing)
+  useEffect(() => {
+    if (resumeData.certifications && resumeData.certifications.length > 0) {
+      setCertificates(
+        resumeData.certifications.map((cert) => {
+          if (typeof cert === 'string') {
+            return { ...emptyCertificate(), name: cert }
+          } else if (cert.certificate_name || cert.issuing_organization) {
+            // Map backend format to frontend format
+            return {
+              name: cert.certificate_name || '',
+              organization: cert.issuing_organization || '',
+              completionDate: cert.date_of_completion || '',
+              credentialId: cert.credential_id || '',
+              credentialUrl: cert.credential_url || ''
+            }
+          } else {
+            // Fallback to existing format
+            return { ...emptyCertificate(), name: cert.name || cert }
+          }
+        })
+      )
+    }
+  }, [resumeData.certifications])
 
   const handleChange = (index, field, value) => {
-    setCertificates((prev) =>
-      prev.map((cert, i) => (i === index ? { ...cert, [field]: value } : cert)),
+    const updated = certificates.map((cert, i) =>
+      i === index ? { ...cert, [field]: value } : cert
     )
+    setCertificates(updated)
+    updateCertifications(updated.map((c) => c.name))
   }
 
   const handleAdd = () => {
-    setCertificates((prev) => [...prev, emptyCertificate()])
+    const updated = [...certificates, emptyCertificate()]
+    setCertificates(updated)
+    updateCertifications(updated.map((c) => c.name))
   }
 
   const handleRemove = (index) => {
-    setCertificates((prev) => prev.filter((_, i) => i !== index))
+    const updated = certificates.filter((_, i) => i !== index)
+    setCertificates(updated.length > 0 ? updated : [emptyCertificate()])
+    updateCertifications(
+      updated.length > 0 ? updated.map((c) => c.name) : []
+    )
   }
 
   return (
@@ -140,5 +183,3 @@ const Certificates = () => {
 }
 
 export default Certificates
-
-
